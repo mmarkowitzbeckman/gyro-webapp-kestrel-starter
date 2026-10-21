@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Gyro</RootNamespace>
+    <AssemblyName>server</AssemblyName>
+    <!-- .env, certs/, data/ and the client build all resolve from the repo root, like the Node server. -->
+    <RunWorkingDirectory>$(MSBuildProjectDirectory)/../..</RunWorkingDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="cuid.net" Version="7.1.0" />
+    <PackageReference Include="DotNetEnv" Version="3.2.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="16.6.9" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.13" />
+    <!-- SQLite3MultipleCiphers: same engine as better-sqlite3-multiple-ciphers, so DB_KEY-encrypted files stay compatible. -->
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3mc" Version="2.1.11" />
+    <PackageReference Include="Yarp.ReverseProxy" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Hot Chocolate's global usings also bring in HotChocolate.Path. -->
+    <Using Include="System.IO.Path" Alias="Path" />
+  </ItemGroup>
+
+</Project>

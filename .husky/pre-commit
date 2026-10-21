@@ -1,0 +1,4 @@
+npx lint-staged
+npm run client:lint
+npm test
+npm run client:test

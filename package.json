@@ -1,0 +1,46 @@
+{
+  "name": "gyro-webapp-kestrel-starter",
+  "version": "1.0.0",
+  "description": "Gyroscope webapp starter - ASP.NET Core (Kestrel) + Hot Chocolate GraphQL server, React + Vite client",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "26.7.0"
+  },
+  "scripts": {
+    "start": "dotnet dist/server.dll",
+    "build:server": "dotnet publish src/Server -c Release -o dist",
+    "dev": "dotnet watch --non-interactive --project src/Server run",
+    "dev:all": "concurrently -n web,client \"npm run dev\" \"npm run client:dev\"",
+    "dev:watch": "./scripts/dev-build-watch.sh",
+    "dev:build-watch": "concurrently -n web,client-build \"npm run dev\" \"npm run client:watch\"",
+    "client:install": "npm --prefix src/web/client install",
+    "client:dev": "npm --prefix src/web/client run dev",
+    "client:build": "npm --prefix src/web/client run build",
+    "client:watch": "npm --prefix src/web/client run build -- --watch",
+    "client:test": "npm --prefix src/web/client test",
+    "client:lint": "npm --prefix src/web/client run lint",
+    "certs:gen": "mkdir -p certs && openssl req -x509 -newkey rsa:2048 -nodes -keyout certs/key.pem -out certs/cert.pem -days 825 -subj \"/CN=localhost\" -addext \"subjectAltName=DNS:localhost,IP:127.0.0.1\"",
+    "db:reset": "node scripts/reset-db.js",
+    "format": "prettier --check src/ && dotnet format --verify-no-changes",
+    "format:fix": "prettier --write",
+    "format:fix-all": "prettier --write src/ && dotnet format",
+    "test": "dotnet test",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": "prettier --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.6"
+  }
+}
